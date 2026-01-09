@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* WaveMind Blue Theme */
+  --primary: 211 100% 35%; /* Professional Deep Blue matching PDF */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 215 25% 95%; /* Very light blue-grey for backgrounds */
+  --secondary-foreground: 215 50% 20%;
+  
+  --background: 0 0% 100%;
+  --foreground: 215 30% 15%; /* Dark blue-grey text is softer than black */
+  
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 15% 45%;
+  
+  --accent: 211 100% 45%; /* Vibrant Wave Blue from Logo */
+  --accent-foreground: 0 0% 100%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 215 90% 48%;
+  
+  --radius: 0.5rem;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --primary: 215 90% 58%;
+  --primary-foreground: 0 0% 100%;
+  /* ... strict dark mode might not be needed for corporate site, but good to have basics */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight text-slate-900;
+  }
+  
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-white;
+  }
+}
+
+/* Custom Utilities */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-accent;
+}
+
+.bg-hero-gradient {
+  background: radial-gradient(circle at top right, hsl(215 100% 40% / 0.1), transparent),
+              linear-gradient(135deg, #1034a6 0%, #1e40af 40%, #0ea5e9 80%, #ffffff 100%);
+}
+
+.section-padding {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+.container-width {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Animation Classes */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
