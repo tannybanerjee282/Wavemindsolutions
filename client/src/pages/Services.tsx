@@ -1,9 +1,19 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Code, Smartphone, Database, Cloud, Brain, Megaphone } from "lucide-react";
+import { useRef } from "react";
 
 export default function Services() {
+  const headerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: headerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   const services = [
     {
       id: "web",
@@ -60,8 +70,11 @@ export default function Services() {
       <Navbar />
 
       {/* Header */}
-      <section className="pt-32 pb-20 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={headerRef} className="pt-32 pb-20 bg-slate-900 text-white overflow-hidden relative">
+        <motion.div 
+          style={{ y: headerY, opacity: headerOpacity }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +85,7 @@ export default function Services() {
               We offer a comprehensive suite of IT services designed to cover every aspect of your digital journey.
             </p>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Detailed Services List */}
