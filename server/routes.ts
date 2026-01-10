@@ -23,21 +23,25 @@ export async function registerRoutes(
           console.log("Attempting to send email via Resend to info@wavemindsolutions.in...");
           
           const { data, error } = await resend.emails.send({
-            from: "WaveMind Website <onboarding@resend.dev>",
+            from: "WaveMind Solutions <onboarding@resend.dev>",
             to: "info@wavemindsolutions.in",
-            subject: `New Inquiry from ${input.firstName}`,
-            text: `Name: ${input.firstName} ${input.lastName}\nCompany: ${input.companyName}\nCountry: ${input.country}\nMessage: ${input.message}`,
+            replyTo: input.firstName + " " + input.lastName + " <" + (input.firstName.toLowerCase() + "@wavemindsolutions.in") + ">",
+            subject: `Website Inquiry: ${input.firstName} ${input.lastName}`,
             html: `
-              <div style="font-family: sans-serif; padding: 20px; color: #333;">
-                <h2 style="color: #1034a6;">New Inquiry: ${input.firstName} ${input.lastName}</h2>
-                <p><strong>Company:</strong> ${input.companyName}</p>
-                <p><strong>Country:</strong> ${input.country}</p>
-                <p><strong>Message:</strong></p>
-                <div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">
-                  ${input.message}
+              <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 10px; padding: 20px;">
+                <h2 style="color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">New Contact Message</h2>
+                <div style="margin-top: 20px;">
+                  <p><strong>Sender Name:</strong> ${input.firstName} ${input.lastName}</p>
+                  <p><strong>Company:</strong> ${input.companyName}</p>
+                  <p><strong>Country:</strong> ${input.country}</p>
+                  <div style="background-color: #f8fafc; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <p><strong>Message:</strong></p>
+                    <p style="color: #475569;">${input.message}</p>
+                  </div>
                 </div>
-                <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-                <p style="font-size: 12px; color: #999;">Sent from wavemindsolutions.in contact form</p>
+                <footer style="margin-top: 30px; font-size: 0.8em; color: #94a3b8; text-align: center;">
+                  <p>This message was sent from the WaveMind Solutions website contact form.</p>
+                </footer>
               </div>
             `,
           });

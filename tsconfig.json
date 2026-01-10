@@ -1,26 +1,41 @@
 {
-  "include": ["client/src", "shared", "server"],
-  "exclude": ["node_modules", "dist", "build", "**/*.test.ts"],
-
   "compilerOptions": {
-    "strict": true,
-    "target": "ES2020",
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+
     "jsx": "react-jsx",
 
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-
-    "esModuleInterop": true,
+    "strict": true,
+    "noEmit": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
+
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
 
     "baseUrl": ".",
-    "types": ["node", "vite/client"],
+    "types": ["vite/client", "node"],
 
     "paths": {
       "@/*": ["client/src/*"],
       "@shared/*": ["shared/*"]
     }
-  }
-}
+  },
 
+  "include": [
+    "client/src",
+    "shared"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "server",
+
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "eslint.config.js"
+  ]
+}

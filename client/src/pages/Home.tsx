@@ -7,19 +7,9 @@ import {
   Target, Lightbulb, HeartHandshake 
 } from "lucide-react";
 import { Link } from "wouter";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -38,11 +28,8 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-hero-gradient">
-        <motion.div 
-          style={{ y: y1, opacity }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-        >
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-hero-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-left max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -87,7 +74,7 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Services Overview */}
